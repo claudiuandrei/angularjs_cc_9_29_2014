@@ -27,5 +27,7 @@ angular.module('ccApp')
         $scope.homeTeam = teamData.get('home');
         $scope.awayTeam = teamData.get('away');
         $scope.homeTeamPlayers = teamData.getPlayers(teamData.get('home').stats);
-        $scope.findInPlayers = teamData.findInPlayers($scope.homeTeamPlayers, 'Palmer')
+        $scope.findInPlayers = function(name) {
+            return teamData.findInPlayers($scope.homeTeamPlayers, name);
+        };
   });
