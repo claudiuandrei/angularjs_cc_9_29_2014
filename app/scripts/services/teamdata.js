@@ -9369,7 +9369,7 @@ angular.module('ccApp')
         },
 
         getPlayers: function() {
-            var players = {};
+            var players = [];
             [data[Object.keys(data)[0]].home, data[Object.keys(data)[0]].away].forEach(function(team) {
                 var statsObj = team.stats;
                 for (var key in statsObj) {
@@ -9381,17 +9381,25 @@ angular.module('ccApp')
                     }
                 }
             });
-            return players;
+
+            var result = [];
+            for(var key in players) {
+                if (players[key].name) {
+                    result.push(players[key]);
+                }
+            }
+
+            return result;
         },
 
         findInPlayers: function(players, text) {
             var regex = new RegExp(text, 'i');
-            for (var key in players) {
-                var match = players[key].name.match(regex);
-                if (match.length) {
-                    return players[key]
+            return players.filter(function(player) {
+                var match = player.name.match(regex);
+                if (match && match.length) {
+                    return true;
                 }
-            }
+            });
         }
     };
 
