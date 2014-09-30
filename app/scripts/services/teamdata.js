@@ -9368,16 +9368,19 @@ angular.module('ccApp')
             return data[Object.keys(data)[0]][key];
         },
 
-        getPlayers: function(statsObj) {
+        getPlayers: function() {
             var players = {};
-            for (var key in statsObj) {
-                for (var playerId in statsObj[key]) {
-                    if (!players[playerId]) {
-                        players[playerId] = { name: statsObj[key][playerId].name, stats: {}};
+            [data[Object.keys(data)[0]].home, data[Object.keys(data)[0]].away].forEach(function(team) {
+                var statsObj = team.stats;
+                for (var key in statsObj) {
+                    for (var playerId in statsObj[key]) {
+                        if (!players[playerId]) {
+                            players[playerId] = { name: statsObj[key][playerId].name, stats: {}};
+                        }
+                        players[playerId].stats[key] = statsObj[key][playerId];
                     }
-                    players[playerId].stats[key] = statsObj[key][playerId];
                 }
-            }
+            });
             return players;
         },
 
