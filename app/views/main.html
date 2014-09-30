@@ -1,0 +1,32 @@
+<ul>
+    <li class="btn btn-primary" ng-repeat="(key, value) in filters">
+        <button class="btn-default" ng-click="setActiveFilter(key)">{{ key }}</button>
+    </li>
+</ul>
+
+<stat-table></stat-table>
+
+<div class="team-container">
+    <table class="table passing-table-{{ key }}" ng-repeat="(key, value) in filters" ng-show="key === activeFilter">
+        <caption>{{ key }}</caption>
+        <thead>
+            <th ng-repeat="type in value">{{ type }}</th>
+        </thead>
+        <tbody>
+        <tr ng-repeat="(playerId, playerStats) in homeTeam.stats[key]">
+            <td ng-repeat="stat in value">{{ playerStats[stat] }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <table class="table passing-table-{{ key }}" ng-repeat="(key, value) in filters" ng-show="key === activeFilter">
+        <caption>{{ key }}</caption>
+        <thead>
+        <th ng-repeat="type in value">{{ type }}</th>
+        </thead>
+        <tbody>
+        <tr ng-repeat="(playerId, playerStats) in awayTeam.stats[key]">
+            <td ng-repeat="stat in value">{{ playerStats[stat] }}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
