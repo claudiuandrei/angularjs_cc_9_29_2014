@@ -1,4 +1,5 @@
 <table class="table passing-table-{{ key }}" ng-repeat="(key, value) in filters" ng-show="key === activeFilter">
+    {{homeTeamPlayers}}
     <caption>{{ key }}</caption>
     <thead>
     <th ng-repeat="type in value">{{ type }}</th>

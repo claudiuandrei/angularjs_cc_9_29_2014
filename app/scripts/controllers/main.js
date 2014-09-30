@@ -24,7 +24,8 @@ angular.module('ccApp')
             kicking: ['name', 'fgm', 'fga', 'fgyds', 'totpfg', 'xpmade', 'xpmissed']
         };
 
-        $scope.homeTeam = teamData.getHomeTeam();
-        $scope.awayTeam = teamData.getAwayTeam();
-
+        $scope.homeTeam = teamData.get('home');
+        $scope.awayTeam = teamData.get('away');
+        $scope.homeTeamPlayers = teamData.getPlayers(teamData.get('home').stats);
+        $scope.findInPlayers = teamData.findInPlayers($scope.homeTeamPlayers, 'Palmer')
   });

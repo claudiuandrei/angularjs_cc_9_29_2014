@@ -9364,11 +9364,31 @@ angular.module('ccApp')
 
     // Public API here
     return {
-        getHomeTeam: function(){
-            return data['2014090801'].home;
+        get: function(key) {
+            return data[Object.keys(data)[0]][key];
         },
-        getAwayTeam: function(){
-            return data['2014090801'].away;
+
+        getPlayers: function(statsObj) {
+            var players = {};
+            for (var key in statsObj) {
+                for (var playerId in statsObj[key]) {
+                    if (!players[playerId]) {
+                        players[playerId] = { name: statsObj[key][playerId].name, stats: {}};
+                    }
+                    players[playerId].stats[key] = statsObj[key][playerId];
+                }
+            }
+            return players;
+        },
+
+        findInPlayers: function(players, text) {
+            var regex = new RegExp(text, 'i');
+            for (var key in players) {
+                var match = players[key].name.match(regex);
+                if (match.length) {
+                    return players[key]
+                }
+            }
         }
     };
 
